@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <p>Skriv længde: </p>
+    <input type="number" id="length">
+
+    <p>Skriv bredde:</p>
+    <input type="number" id="width">
+
+    <div id="button">
+        <button>OK</button>
+    </div>
+    <script>
+        window.addEventListener("load", clickButton);
+
+
+        function clickButton() {
+
+            document.querySelector("#button").addEventListener("click", calculate);
+
+        }
+
+        function calculate() {
+            console.log("Længde: " + document.querySelector("#length").value + ", bredde: " + document.querySelector("#width").value + ", areal: " + (document.querySelector("#length").value * document.querySelector("#width").value))
+        }
+
+    </script>
+</body>
+
+</html>
