@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+        window.addEventListener("load", calculate);
+        let length = 10;
+        let width = 20;
+        let areaTooSmall = "Arealet er for lille";
+        let areaOk = "Arealet er ok";
+        let areaTooBig = "Arealet er for stort";
+
+        function calculate() {
+            if ((length * width) < 100) {
+                console.log(areaTooSmall);
+            }
+
+            if ((length * width) > 100 && (length * width) < 200) {
+                console.log(areaOk);
+            }
+
+            if ((length * width) >= 200) {
+                console.log(areaTooBig);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
