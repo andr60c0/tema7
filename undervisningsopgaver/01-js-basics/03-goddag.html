@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <p>Hvad hedder du?</p>
+    <input type="text" id="name">
+    <div id="button">
+        <button>OK</button>
+    </div>
+    <script>
+        window.addEventListener("load", inputName);
+
+        function inputName() {
+            console.log("Hvad hedder du?")
+            document.querySelector("#button").addEventListener("click", goddag)
+
+        }
+
+        function goddag() {
+            console.log("Goddag " + document.querySelector("#name").value)
+        }
+
+    </script>
+</body>
+
+</html>
