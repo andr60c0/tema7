@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <p>Skriv længden på din flyverejse i timer: </p>
+    <input type="text" id="hours">
+
+
+
+    <div id="button">
+        <button>Udregn dit CO2 udledning med at klikke på knappen og kig i konsollen</button>
+    </div>
+    <script>
+        document.querySelector("#button").addEventListener("click", button_clicked);
+
+
+
+
+        function button_clicked() {
+            let hours = document.querySelector("#hours").value;
+            let co2skala = 109;
+
+            console.log("Ved " + hours + " timers flyrejse har du udledt " + co2Udledning(hours, co2skala) + " kg CO2");
+
+
+        }
+
+        function co2Udledning(h, c) {
+            if (isNaN(h, c)) {
+                console.log("Dette er ikke en gyldig indtastning");
+            }
+
+            return (h * c);
+
+
+
+
+
+        }
+
+    </script>
+</body>
+
+</html>
