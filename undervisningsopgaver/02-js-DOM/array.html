@@ -9,9 +9,13 @@
 <body>
     <ul id="display"></ul>
     <script>
-        const songs = ["Holoscene1", "Holoscene2", "Holoscene3", "Holoscene4", "Holoscene5", "Holoscene6", "Holoscene7", "Holoscene8", "Holoscene9", "Holoscene10"];
+        let songs = ["Holoscene1", "Holoscene2", "Holoscene3", "Holoscene4", "Holoscene5", "Holoscene6", "Holoscene7", "Holoscene8", "Holoscene9", "Holoscene10"];
 
-        songs.forEach((song, index) => console.log(song, index));
+        songs.forEach((song) => {
+
+            document.querySelector("#display").innerHTML += `${song} <br>`;
+
+        });
 
     </script>
 </body>
