@@ -25,6 +25,10 @@
 
         function hilsen(time) {
 
+            if (time < 5) {
+                console.log("God nat!")
+            }
+
             if (time > 5 && time < 10) {
                 return ("God morgen!");
             }
@@ -37,7 +41,7 @@
                 return ("God aften!");
             }
 
-            if (time > 24 && time < 5) {
+            if (time > 24) {
                 return ("God nat!");
             }
         }
