@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="sporgsmal">Er du en klaphat?</p>
+    <input type=text placeholder="Dit svar" id="inputfelt">
+    <button id="knap" type=button>Klik på knappen for at se om dit svar er rigtigt!</button>
+
+
+
+
+
+    <script>
+        let sporgsmal = document.querySelector("#sporgsmal").value;
+        let knap = document.querySelector("#knap");
+        let points = 0;
+
+        knap.addEventListener("click", knapKlik);
+
+        function knapKlik() {
+            sporgsmal.textContent = "Er du en idiot?";
+            knap.removeEventListener("click", knapKlik);
+            let svar = document.querySelector("#inputfelt").value;
+
+
+            if (svar == "Ja" || svar == "ja") {
+                console.log("Ja, det er rigtigt");
+                point++;
+
+            } else {
+                console.log("Prøv igen :S ");
+            }
+
+            //            knap.addEventListener("click", knapKlik2);
+        }
+
+        //        function knapKlik2() {
+        // sporgsmal.textContent = "Er du en idiotsandwich?";
+        //
+        // knap.removeEventListener("click", knapKlik2);
+        // let svar = document.querySelector("#inputfelt").value;
+        //
+        // if (svar == "Ja" || svar == "ja") {
+        // console.log("Ja, det er rigtigt");
+        // } else {
+        // console.log("Prøv igen :S ");
+        // }
+        //
+        // }
+
+    </script>
+</body>
+
+</html>
