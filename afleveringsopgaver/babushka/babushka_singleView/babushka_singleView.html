@@ -141,7 +141,7 @@
     <section class="data-container"></section>
 
     <template>
-        <article class="overview">
+        <article class="madvarer">
             <h3 id="navn"></h3>
             <img src="" alt="billede">
             <p id="kategori"></p>
@@ -155,6 +155,16 @@
 
         </article>
     </template>
+
+    <section id="detalje" class="">
+        <article id="madvarerPop">
+            <button id="detalje_button">X</button>
+            <h1 id="h1pop"></h1>
+            <img>
+            <p></p>
+            <p></p>
+        </article>
+    </section>
 
     <script>
         const container = document.querySelector(".data-container");
@@ -193,7 +203,12 @@
                     klon.querySelector("img").src = `imgs/small/${dish.gsx$billede.$t}-sm.jpg`;
                     klon.querySelector("#kort").textContent = dish.gsx$kort.$t;
                     klon.querySelector("#pris").textContent += " " + dish.gsx$pris.$t + ".-";
-                    //                    klon.querySelector("#kategori").textContent = dish.gsx$kategori.$t;
+                    klon.querySelector(".madvarer").addEventListener("click", () => {
+                        //visDetalje(person);
+                        location.href = "detalje.html?id=" + dish.gsx$id.$t;
+                    });
+
+
                     container.appendChild(klon);
 
                 }
