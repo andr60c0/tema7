@@ -10,7 +10,7 @@
             margin: 10px;
         }
 
-        section {
+        .data-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             max-width: 1000px;
@@ -21,7 +21,7 @@
             width: 100%;
         }
 
-        section {
+        .data-container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 10px;
@@ -40,6 +40,23 @@
         .valgt {
             background-color: red;
         }
+
+        #detalje {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #person {
+            border: 1px solid black;
+            background-color: #ececec;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 <header>
@@ -57,7 +74,7 @@
     <h1></h1>
     <section class="data-container"></section>
     <template>
-        <article class="overview">
+        <article class="person">
 
             <h2></h2>
             <img src="" alt="">
@@ -71,6 +88,16 @@
 
         </article>
     </template>
+
+    <section id="detalje" class="hide">
+        <article id="person">
+            <button id="detalje_button">X</button>
+            <h1></h1>
+            <img>
+            <p></p>
+            <p></p>
+        </article>
+    </section>
     <script>
         //start
         //hent data
@@ -81,13 +108,16 @@
         let allePersoner = [];
         let filter = "alle";
         document.addEventListener("DOMContentLoaded", start);
+        const detalje = document.querySelector("#detalje");
 
         function start() {
             loadPersonData();
             addEventListenersToButtons();
         }
 
+        function filtrerPersoner() {
 
+        }
 
 
 
@@ -115,6 +145,7 @@
                     klon.querySelector("#hobby").textContent = person.gsx$hobby.$t;
                     klon.querySelector("#by").textContent = person.gsx$by.$t;
                     klon.querySelector("#rpc").textContent = person.gsx$rpc.$t;
+                    klon.querySelector(".person").addEventListener("click", () => visDetalje(person));
                     container.appendChild(klon);
 
 
@@ -146,6 +177,22 @@
             visPersoner();
             document.querySelector("h1").textContent = this.textContent;
 
+
+
+        }
+
+        function visDetalje(person) {
+            console.log("visDetaljer");
+            detalje.classList.remove("hide");
+            detalje.querySelector("#detalje_button").addEventListener("click", () => {
+                detalje.classList.add("hide");
+            });
+            detalje.querySelector("h1").textContent = person.gsx$navn.$t;
+            detalje.querySelector("p").textContent = person.gsx$religion.$t;
+            detalje.querySelector("p+p").textContent = person.gsx$religion.$t;
+
+            detalje.querySelector("img").src = person.gsx$billede.$t;
+            detalje.querySelector("img").alt = person.gsx$efternavn.$t;
 
 
         }
