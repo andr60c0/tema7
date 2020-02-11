@@ -30,13 +30,23 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
         }
+
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        nav button:hover {
+            color: red;
+        }
     </style>
 </head>
 <header>
     <nav>
-        <a href="#women">Kvinder</a>
-        <a href="#men">Mænd</a>
-        <a href="#all">Alle</a>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter" data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="andet">Andet</button>
     </nav>
 </header>
 
@@ -85,22 +95,9 @@
         function visPersoner() {
             const container = document.querySelector(".data-container");
             const template = document.querySelector("template");
-            let filter = "k";
+            let filter = "andet";
 
-            //            allePersoner.feed.entry.forEach(person => {
-            //                let klon = template.cloneNode(true).content;
-            //                klon.querySelector("h2").textContent = person.gsx$navn.$t;
-            //                klon.querySelector("h2").textContent += " " + person.gsx$efternavn.$t;
-            //                klon.querySelector("img").src = person.gsx$billede.$t;
-            //                klon.querySelector("#alder").textContent = person.gsx$alder.$t;
-            //                klon.querySelector("#religion").textContent = person.gsx$religion.$t;
-            //                klon.querySelector("#sex").textContent = person.gsx$sex.$t;
-            //                klon.querySelector("#hobby").textContent = person.gsx$hobby.$t;
-            //                klon.querySelector("#by").textContent = person.gsx$by.$t;
-            //                klon.querySelector("#rpc").textContent = person.gsx$rpc.$t;
-            //                container.appendChild(klon);
-            //
-            //            })
+
 
             allePersoner.feed.entry.forEach(person => {
                 if (person.gsx$sex.$t == filter) {

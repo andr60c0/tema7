@@ -11,7 +11,7 @@
         }
 
         article {
-            border: 1px solid #E4DFD8;
+
             margin: 10px;
             background: #E4DFD8;
 
@@ -49,6 +49,7 @@
             text-align: center;
             margin-top: 200px;
             color: #E4DFD8;
+            letter-spacing: 8px;
 
 
         }
@@ -70,27 +71,35 @@
             font-weight: 700;
         }
 
+        header {}
 
-        header {
 
-            position: fixed;
-            top: 0;
-            padding: 20px;
-            margin-left: 420px;
-            background-color: #732C26;
-
-        }
 
         nav {
+            display: flex;
+            justify-content: center;
             font-family: 'Playfair Display', serif;
+            color: #732C26;
+            background-color: #E4DFD8;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            left: 0;
+            padding: 10px;
+
+
 
 
         }
 
+
+
         nav a {
-            color: #E4DFD8;
+            color: #732C26;
             text-decoration: none;
             margin: 10px;
+            font-size: 1.2rem;
+
         }
 
         p {
@@ -99,18 +108,27 @@
 
 
         }
+
+        .retter_kategori {
+            color: #E4DFD8;
+        }
+
+        .valgt {
+            border: 1px solid #732C26;
+            padding: 4px;
+
+        }
     </style>
 </head>
 <header>
     <nav>
-        <a href="#forretter">Forretter</a>
-        <a href="#hovedretter">Hovedretter</a>
-        <a href="#desserter">Desserter</a>
-        <a href="#sideorders">Side orders</a>
-        <a href="#drikkevarer">Drikkevarer</a>
 
-
-
+        <a href="#alle" class="filter valgt" data-kategori="alle">Alle</a>
+        <a href="#forretter" class="filter" data-kategori="forretter">Forretter</a>
+        <a href="#hovedretter" class="filter" data-kategori="hovedretter">Hovedretter</a>
+        <a href="#desserter" class="filter" data-kategori="desserter">Desserter</a>
+        <a href="#sideorders" class="filter" data-kategori="sideorders">Side Orders</a>
+        <a href="#" class="filter" data-kategori="drikkevarer">Drikkevarer</a>
 
 
     </nav>
@@ -119,12 +137,13 @@
 <body>
     <h1>BABUSHKA <i>BISTRO</i></h1>
     <h2>Menu</h2>
+    <h3 class="retter_kategori">Alle</h3>
     <section class="data-container"></section>
 
     <template>
         <article class="overview">
             <h3 id="navn"></h3>
-            <img src="" alt="">
+            <img src="" alt="billede">
             <p id="kategori"></p>
 
             <p id="kort"></p>
@@ -138,15 +157,16 @@
     </template>
 
     <script>
-        //start
-        //hent data
-        //visDyr
+        const container = document.querySelector(".data-container");
+        const template = document.querySelector("template");
         const endpoint = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
         let alleRetter = [];
+        let filter = "alle";
         document.addEventListener("DOMContentLoaded", start);
 
         function start() {
             loadData();
+            addEventListenersToButtons();
         }
 
 
@@ -163,22 +183,45 @@
 
         function visRetter() {
 
-            const container = document.querySelector(".data-container");
-            const template = document.querySelector("template");
+            container.innerHTML = "";
 
             alleRetter.feed.entry.forEach(dish => {
-                let klon = template.cloneNode(true).content;
-                klon.querySelector("h3").textContent = dish.gsx$navn.$t;
-                //                klon.querySelector("img").src = dish.gsx$billede.$t;
-                klon.querySelector("#kort").textContent = dish.gsx$kort.$t;
-                klon.querySelector("#pris").textContent += " " + dish.gsx$pris.$t + ".-";
-                klon.querySelector("#kategori").textContent = dish.gsx$kategori.$t;
-                container.appendChild(klon);
+                if (filter == "alle" || filter == dish.gsx$kategori.$t) {
+
+                    let klon = template.cloneNode(true).content;
+                    klon.querySelector("h3").textContent = dish.gsx$navn.$t;
+                    klon.querySelector("img").src = `imgs/small/${dish.gsx$billede.$t}-sm.jpg`;
+                    klon.querySelector("#kort").textContent = dish.gsx$kort.$t;
+                    klon.querySelector("#pris").textContent += " " + dish.gsx$pris.$t + ".-";
+                    //                    klon.querySelector("#kategori").textContent = dish.gsx$kategori.$t;
+                    container.appendChild(klon);
+
+                }
+
 
             })
 
 
+        }
 
+        function addEventListenersToButtons() {
+            console.log("Button clicked");
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
+
+        function filtrering() {
+            console.log("FILTER");
+            filter = this.dataset.kategori;
+
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+
+            this.classList.add("valgt");
+            visRetter();
+            document.querySelector(".retter_kategori").textContent = this.textContent;
         }
     </script>
 </body></html>
